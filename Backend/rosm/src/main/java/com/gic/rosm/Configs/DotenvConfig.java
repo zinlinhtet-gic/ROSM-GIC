@@ -13,14 +13,20 @@ public class DotenvConfig {
 
     @Bean(name = "mainDataSource")
     public DataSource mainDataSource() {
-        Dotenv dotenv = Dotenv.configure().directory("./").load();
 
-        String dbUrl = dotenv.get("DB_URL");
-        String dbUsername = dotenv.get("DB_USERNAME");
-        String dbPassword = dotenv.get("DB_PASSWORD");
-        System.out.println("DB_URL: " + dbUrl);
-        System.out.println("DB_USERNAME: " + dbUsername);
-        System.out.println("DB_PASSWORD: " + dbPassword);
+        String profile = System.getProperty("spring.profiles.active", "local");
+        String dbUrl, dbUsername, dbPassword;
+        if ("docker".equals(profile)) {
+            Dotenv dotenv = Dotenv.configure().directory("./").load();
+            dbUrl = dotenv.get("DOCKER_DB_URL");
+            dbUsername = dotenv.get("DOCKER_DB_USERNAME");
+            dbPassword = dotenv.get("DOCKER_DB_PASSWORD");
+        } else {
+            Dotenv dotenv = Dotenv.configure().directory("./rosm").load();
+            dbUrl = dotenv.get("LOCAL_DB_URL");
+            dbUsername = dotenv.get("LOCAL_DB_USERNAME");
+            dbPassword = dotenv.get("LOCAL_DB_PASSWORD");
+        }
         return DataSourceBuilder.create()
                 .url(dbUrl)
                 .username(dbUsername)

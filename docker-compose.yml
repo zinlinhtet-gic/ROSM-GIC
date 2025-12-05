@@ -5,12 +5,12 @@ services:
     image: mysql:8
     container_name: mysql-db
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DOCKER_DB_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     volumes:
       - mysql_data:/var/lib/mysql
     ports:
-      - "3307:3306"   # mapped to host 3307 to avoid conflicts
+      - "3307"   # mapped to host 3307 to avoid conflicts
 
   backend:
     build: 
@@ -19,11 +19,11 @@ services:
     container_name: spring-backend
     depends_on:
       - mysql
-    # environment:
+    environment:
     #   SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE}
     #   SPRING_DATASOURCE_USERNAME: root
     #   SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
-    #   SPRING_PROFILES_ACTIVE: docker
+       SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8080:8080"
     restart: unless-stopped

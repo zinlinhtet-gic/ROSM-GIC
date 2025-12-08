@@ -1,0 +1,97 @@
+{
+  "auth": {
+    "me": {
+      "staff_id": 1,
+      "name": "Admin User",
+      "role": "ADMIN"
+    },
+    "login": {
+      "token": "mock-jwt-token-123",
+      "staff": {
+        "staff_id": 1,
+        "name": "Admin User",
+        "role": "ADMIN"
+      }
+    }
+  },
+
+  "dashboard_admin": {
+    "active_staff": 12,
+    "today_slips": 43,
+    "weekly_sales": 120000,
+    "top_menus": [
+      { "menu_id": 1, "name": "Cappuccino", "sold": 50 },
+      { "menu_id": 2, "name": "Latte", "sold": 40 }
+    ]
+  },
+
+  "dashboard_waiter": {
+    "worked_days": 26,
+    "orders_delivered": 140
+  },
+
+  "dashboard_cashier": {
+    "worked_days": 29,
+    "slips_managed": 210
+  },
+
+  "staff": [
+    { "id": 1, "name": "Admin User", "role": "ADMIN", "login_name": "admin", "password": "1234" },
+    { "id": 2, "name": "Alice Waiter", "role": "WAITER", "login_name": "alice", "password": "1234" },
+    { "id": 3, "name": "Bob Cashier", "role": "CASHIER", "login_name": "bob", "password": "1234" }
+  ],
+
+  "staff_roles": ["ADMIN", "WAITER", "CASHIER"],
+
+  "menu": [
+    { "id": 1, "name": "Cappuccino", "price": 3500, "category": "Coffee" },
+    { "id": 2, "name": "Mocha", "price": 4000, "category": "Coffee" }
+  ],
+
+  "menu_categories": ["Coffee", "Tea", "Snacks"],
+
+  "slips": [
+    {
+      "id": 1,
+      "table_id": 4,
+      "status": "ACTIVE",
+      "subtotal": 13000,
+      "tax": 500,
+      "service_charge": 500,
+      "total": 14000,
+      "cashier": "Bob Cashier"
+    }
+  ],
+
+  "layouts": [
+    {
+      "id": 1,
+      "name": "Main Hall",
+      "is_active": true,
+      "tables": [
+        { "table_id": 1, "number": 1, "status": "AVAILABLE" },
+        { "table_id": 2, "number": 2, "status": "OCCUPIED" }
+      ]
+    }
+  ],
+
+  "tables_available": [
+    { "table_id": 1, "number": 1 }
+  ],
+
+  "tables_occupied": [
+    { "table_id": 2, "number": 2, "slip_id": 1 }
+  ],
+
+  "active_slip": {
+    "slip_id": 1,
+    "orders": [
+      { "order_id": 1, "menu_id": 1, "qty": 2, "price": 3500 }
+    ],
+    "total": 14000
+  },
+
+  "orders": [
+    { "id": 1, "slip_id": 1, "menu_id": 1, "qty": 2, "status": "CREATED" }
+  ]
+}

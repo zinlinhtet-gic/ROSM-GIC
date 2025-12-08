@@ -1,0 +1,14 @@
+FROM node:18 AS build
+
+WORKDIR /app
+
+# Copy db.json containing mock data
+COPY mockapi/db.json .
+COPY mockapi/route.json .
+
+# Install JSON server globally
+RUN npm install -g json-server
+
+EXPOSE 8000
+
+CMD ["json-server", "--watch", "db.json", "--routes", "route.json", "--host", "0.0.0.0", "--port", "8000"]

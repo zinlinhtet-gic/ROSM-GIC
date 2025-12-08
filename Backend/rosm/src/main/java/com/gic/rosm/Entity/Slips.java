@@ -16,6 +16,8 @@ public class Slips {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    private Double paidAmount;
+    private Double changeAmount;
     private Double totalAmount;
     private LocalDateTime paymentTime;
     private LocalDateTime createdAt;

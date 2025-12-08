@@ -15,6 +15,7 @@ public class Staff {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String nrc;
     private String loginName;
     private String password;
     @Enumerated(EnumType.STRING)
@@ -38,6 +39,10 @@ public class Staff {
 
     public String getName() {
         return name;
+    }
+
+    public String getNrc() {
+        return nrc;
     }
 
     public String getPassword() {
@@ -86,6 +91,10 @@ public class Staff {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setNrc(String nrc) {
+        this.nrc = nrc;
     }
 
     public void setRole(StaffRole role) {

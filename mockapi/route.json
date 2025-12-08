@@ -1,0 +1,32 @@
+{
+  "/api/auth/me": "/auth/me",
+  "/api/auth/login": "/auth/login",
+  "/api/auth/logout": "/auth/me",
+
+  "/api/dashboard/admin": "/dashboard_admin",
+  "/api/dashboard/waiter": "/dashboard_waiter",
+  "/api/dashboard/cashier": "/dashboard_cashier",
+
+  "/api/staff": "/staff",
+  "/api/staff/:id": "/staff/:id",
+  "/api/staff/roles": "/staff_roles",
+
+  "/api/menu": "/menu",
+  "/api/menu/:id": "/menu/:id",
+  "/api/menu/category": "/menu_categories",
+
+  "/api/slips": "/slips",
+  "/api/slips/:id": "/slips/:id",
+
+  "/api/layouts": "/layouts",
+  "/api/layouts/active": "/layouts?is_active=true",
+  "/api/layouts/:id": "/layouts/:id",
+  "/api/layouts/:id/status": "/layouts/:id",
+
+  "/api/tables/available": "/tables_available",
+  "/api/tables/occupied": "/tables_occupied",
+  "/api/tables/:id/activeslip": "/active_slip",
+
+  "/api/orders/slip/:id": "/orders?slip_id=:id",
+  "/api/orders/:id": "/orders/:id"
+}

@@ -35,9 +35,18 @@ services:
     container_name: react-frontend
     depends_on:
       - backend
+      - mockapi
     ports:
       - "3000:80"   # host:container -> access frontend via http://localhost:3000
     restart: unless-stopped
+
+  # mockapi:
+  #   build: ./mockapi
+  #   container_name: mockapi
+  #   ports:
+  #     - "8000:8000"
+  #   volumes:
+  #     - ./mockapi/db.json:/app/db.json
 
 volumes:
   mysql_data:

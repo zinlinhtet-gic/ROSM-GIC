@@ -1,5 +1,7 @@
 package com.gic.rosm.Utility;
 
+import com.gic.rosm.Service.AuthService;
+import com.gic.rosm.Service.BlackListedService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,6 +22,8 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtils jwtUtils;
+    @Autowired
+    private BlackListedService blackListedService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest req,
@@ -31,15 +35,18 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
-
+            if (blackListedService.isTokenBlacklisted(token)) {
+                res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                return; // stop further processing
+            }
             try {
                 Claims claims = jwtUtils.extractClaims(token);
 
                 String role = claims.get("role", String.class);
-
+                System.out.println(role);
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(
-                                claims.get("username"),
+                                claims.get("id", Long.class),
                                 null,
                                 List.of(new SimpleGrantedAuthority("ROLE_" + role))
                         );
